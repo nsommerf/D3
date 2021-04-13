@@ -1,4 +1,4 @@
-// create a plot of smokers versus age
+/// create a plot of smokers versus age
 
 //Using the D3 techniques we taught you in class, create a scatter plot that represents each state 
 //with circle elements. You'll code this graphic in the app.js file of your homework directory—
@@ -83,18 +83,19 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 
   var label;
 
-  if (chosenXAxis === "smokes") {
+  //if (chosenXAxis === "smokes") {
     label = "Smokes:";
-  }
-  else {
-    label = "Age:";
-  }
+  //}
+  //else {
+  //  label = "Age:";
+  //}
 
   var toolTip = d3.tip()
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function(d) {
-      return (`${d.abbr}<br>${label} ${d[chosenXAxis]}`);
+      //return (`${d.abbr}<br>${label} ${d[chosenXAxis]}`);
+      return (`${d.abbr}<br>`);
     });
 
   circlesGroup.call(toolTip);
@@ -161,19 +162,19 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
     var labelsGroup = chartGroup.append("g")
       .attr("transform", `translate(${width / 2}, ${height + 20})`);
   
-    var ageLabel = labelsGroup.append("text")
-      .attr("x", 0)
-      .attr("y", 20)
-      .attr("value", "age") // value to grab for event listener
-      .classed("active", true)
-      .text("Age (years)");
+    //var ageLabel = labelsGroup.append("text")
+     // .attr("x", 0)
+     // .attr("y", 20)
+    //  .attr("value", "age") // value to grab for event listener
+    //  .classed("active", true)
+    //  .text("Age (years)");
   
     var smokesLabel = labelsGroup.append("text")
       .attr("x", 0)
       .attr("y", 40)
       .attr("value", "smokes") // value to grab for event listener
       .classed("inactive", true)
-      .text("# of smokes");
+      .text("# of Smokes");
   
     // append y axis
     chartGroup.append("text")
@@ -182,7 +183,7 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .classed("axis-text", true)
-      .text("Number of Smokers");
+      .text("Age (years)");
   
     // updateToolTip function above csv import
     var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
@@ -213,25 +214,24 @@ d3.csv("assets/data/data.csv").then(function(data, err) {
           circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
   
           // changes classes to change bold text
-          if (chosenXAxis === "smokes") {
+          //if (chosenXAxis === "smokes") {
             smokesLabel
               .classed("active", true)
               .classed("inactive", false);
             ageLabel
               .classed("active", false)
               .classed("inactive", true);
-          }
-          else {
-            smokesLabel
-              .classed("active", false)
-              .classed("inactive", true);
-            ageLabel
-              .classed("active", true)
-              .classed("inactive", false);
-          }
+         // }
+         // else {
+         //   smokesLabel
+         //     .classed("active", false)
+         //     .classed("inactive", true);
+         //   ageLabel
+         //     .classed("active", true)
+         //     .classed("inactive", false);
+        //  }
         }
       });
   }).catch(function(error) {
     console.log(error);
   });
-
